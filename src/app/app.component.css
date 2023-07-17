@@ -1,0 +1,7 @@
+input:invalid {
+    border-color: red;
+  }
+
+.error{
+  border-color: red;
+}

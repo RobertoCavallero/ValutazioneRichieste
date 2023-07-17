@@ -1,0 +1,188 @@
+<div class="row">
+  <h4>3 - Bisogni Assicurativi</h4>
+  <div class="container p-5 rounded border">
+    <div class="row mb-3">
+      <div class="col-auto me-5">
+        <h6>Ambito della copertura assicurativa richiesta:</h6>
+      </div>
+      <div class="col-auto row">
+        <div class="form-check form-check-inline col-auto ">
+          <input class="form-check-input" name="ambitoAss" [(ngModel)]="objRisultato.AmbitoCopertura" type="radio"
+            id="privAss" value="Privato">
+          <label class="form-check-label" for="privAss">Privato</label>
+        </div>
+        <div class="form-check form-check-inline col-auto ">
+          <input class="form-check-input" name="ambitoAss" [(ngModel)]="objRisultato.AmbitoCopertura" type="radio"
+            id="lavAss" value="Lavorativo">
+          <label class="form-check-label" for="lavAss">Lavorativo</label>
+        </div>
+        <div class="form-check form-check-inline col-auto ">
+          <input class="form-check-input" name="ambitoAss" [(ngModel)]="objRisultato.AmbitoCopertura" type="radio"
+            id="bhoAss" value="Ignoto">
+          <label class="form-check-label" for="bhoAss">Non sa / Non risponde</label>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-auto me-5">
+        <h6>Esistenza di altre coperture assicurative(polizze) su:</h6>
+      </div>
+      <div class="col-auto ms-2 row align-items-center">
+        <div class="form-check form-check-inline col-auto " *ngFor="let polizza of arrPolizze">
+          <input class="form-check-input" type="checkbox" (click)="clickPolizza(polizza)" id="{{polizza}}"
+            value="{{polizza}}">
+          <label class="form-check-label" for="{{polizza}}">{{polizza}}</label>
+        </div>
+        <div class="form-check form-check-inline col-auto me-0">
+          <input class="form-check-input" [(ngModel)]="altraPolizza" type="checkbox" id="AltraAss" value="Altro">
+          <label class="form-check-label" for="AltraAss">Altro</label>
+        </div>
+        <div *ngIf="altraPolizza" class="col-auto m-1 ms-0">
+          <input class="form-control form-control-sm" [(ngModel)]="polizzaAgg" placeholder="Altra polizza" type="text"
+            name="altraPolizza" id="altraPolizza">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <h6>OBIETTIVI ASSICURATIVI E SOGGETTI DA TUTELARE (può inserire anche più di una crocetta ma
+        è importante comunque che si ricordi di crocettare anche quella che più si avvicina al prodotto che sta
+        acquistando. Ad esempio se sta acquistando una polizza di rc professionale, crocetti “nell’esercizio della
+        professione”, mentre in caso di polizza incendio e scoppio, crocetti nella sezione “Protezione dei beni”,
+        il campo “Propri” o “Altrui” ed il campo “Per Danneggiamento”).</h6>
+      <ul class="ms-5">
+        <li>
+          <h6>Protezione del proprio patrimonio per richieste di risarcimento dovute a danni causati a
+            terzi:</h6>
+          <div class="row ms-2">
+            <div class="form-check form-check-inline col-auto ">
+              <input class="form-check-input" [(ngModel)]="objRisultato.ProtezioneDanniCausati.VitaPersonale"
+                type="checkbox" id="vitProf" value="nella vita personale">
+              <label class="form-check-label" for="vitProf">nella vita personale</label>
+            </div>
+            <div class="form-check form-check-inline col-auto ">
+              <input class="form-check-input" [(ngModel)]="objRisultato.ProtezioneDanniCausati.EsercizioProfessione"
+                type="checkbox" id="esProf" value="nell'esercizio delle professione">
+              <label class="form-check-label" for="esProf">nell'esercizio della professione</label>
+            </div>
+          </div>
+        </li>
+        <li>
+          <h6>Protezione dei beni:</h6>
+          <div class="row ms-2">
+            <div class="form-check form-check-inline col-auto ">
+              <input class="form-check-input" (change)="almenoUnProt()" [(ngModel)]="objRisultato.ProtezioneBeni.Propri"
+                type="checkbox" id="propri" value="Propri">
+              <label class="form-check-label" for="propri">Propri</label>
+            </div>
+            <div class="form-check form-check-inline col-auto ">
+              <input class="form-check-input" (change)="almenoUnProt()" [(ngModel)]="objRisultato.ProtezioneBeni.Altrui"
+                type="checkbox" id="Altrui" value="Altrui">
+              <label class="form-check-label" for="Altrui">Altrui</label>
+            </div>
+          </div>
+          <div class=" ms-5" *ngIf="protBeni" id="specProtBeni">
+            <div class="form-check m-2 ">
+              <input class="form-check-input" [(ngModel)]="objRisultato.ProtezioneBeni.Specifiche.Danneggiamento"
+                type="checkbox" id="danneggiamento" value="per danneggiamento">
+              <label class="form-check-label" for="danneggiamento">per danneggiamento (es: incendio, scoppio, acqua
+                condotta, esplosione, etc)</label>
+            </div>
+            <div class="form-check m-2 ">
+              <input class="form-check-input" [(ngModel)]="objRisultato.ProtezioneBeni.Specifiche.Sottrazione"
+                type="checkbox" id="sottrazione" value="per sottrazione">
+              <label class="form-check-label" for="sottrazione">per sottrazione (es: furto, scippo, rapina,
+                etc)</label>
+            </div>
+            <div class="form-check m-2 ">
+              <input class="form-check-input" [(ngModel)]="objRisultato.ProtezioneBeni.Specifiche.Trasferimento"
+                type="checkbox" id="trasferimento" value="per trasferimento, trasporti">
+              <label class="form-check-label" for="trasferimento">per trasferimento, trasporti</label>
+            </div>
+          </div>
+
+        </li>
+        <li>
+          <h6>Tutela Legale:</h6>
+          <div class="row ms-2">
+            <div class="form-check form-check-inline col-auto ">
+              <input class="form-check-input" [(ngModel)]="objRisultato.TutelaLegale.Professione" type="checkbox"
+                id="propProf" value="per la propria professione">
+              <label class="form-check-label" for="propProf">per la propria professione</label>
+            </div>
+            <div class="form-check form-check-inline col-auto ">
+              <input class="form-check-input" [(ngModel)]="objRisultato.TutelaLegale.Famiglia" type="checkbox" id="fami"
+                value="per la famiglia">
+              <label class="form-check-label" for="fami">per la famiglia</label>
+            </div>
+            <div class="form-check form-check-inline col-auto ">
+              <input class="form-check-input" [(ngModel)]="objRisultato.TutelaLegale.Azienda" type="checkbox" id="azi"
+                value="per l'azienda">
+              <label class="form-check-label" for="azi">per l'azienda</label>
+            </div>
+          </div>
+        </li>
+        <li>
+          <h6>
+            Protezione della propria persona e/o dei familiari
+          </h6>
+          <div class="row ms-2">
+            <div class="form-check form-check-inline col-auto ">
+              <input class="form-check-input" (change)="almenoUnProt()"
+                [(ngModel)]="objRisultato.ProtezionePersonale.SeStessi" type="checkbox" id="propProf2"
+                value="per la propria professione">
+              <label class="form-check-label" for="propProf2">per se stessi</label>
+            </div>
+            <div class="form-check form-check-inline col-auto ">
+              <input class="form-check-input" (change)="almenoUnProt()"
+                [(ngModel)]="objRisultato.ProtezionePersonale.Famiglia" type="checkbox" id="fami2"
+                value="per la famiglia">
+              <label class="form-check-label" for="fami2">per la famiglia</label>
+            </div>
+          </div>
+          <div class="row ms-2" *ngIf="protProp" id="specProtProp">
+            <div class="row">e in maniera specifica:</div>
+            <div class="form-check form-check-inline col-auto ">
+              <input class="form-check-input" type="checkbox"
+                [(ngModel)]="objRisultato.ProtezionePersonale.Specifiche.Infortuni" id="infortuni"
+                value="per infortuni">
+              <label class="form-check-label" for="infortuni">per infortuni</label>
+            </div>
+            <div class="form-check form-check-inline col-auto ">
+              <input class="form-check-input" type="checkbox"
+                [(ngModel)]="objRisultato.ProtezionePersonale.Specifiche.Malattie" id="malattia" value="per malattia">
+              <label class="form-check-label" for="malattia">per malattia</label>
+            </div>
+            <div class="form-check form-check-inline col-auto ">
+              <input class="form-check-input" type="checkbox"
+                [(ngModel)]="objRisultato.ProtezionePersonale.Specifiche.Morte" id="morte" value="per morte">
+              <label class="form-check-label" for="morte">per morte</label>
+            </div>
+          </div>
+        </li>
+        <li>
+          <h6>
+            Protezione viaggi:
+          </h6>
+          <div class="row ms-2">
+            <div class="form-check form-check-inline col-auto ">
+              <input class="form-check-input" [(ngModel)]="objRisultato.ProtezioneViaggi.Viaggi" type="checkbox"
+                id="propProf2" value="per la propria professione">
+              <label class="form-check-label" for="propProf2">viaggi (annullamento, perdita bagagli, infortuni,
+                assistenza sanitaria, ect)</label>
+            </div>
+            <div class="form-check form-check-inline col-auto ">
+              <input class="form-check-input" [(ngModel)]="objRisultato.ProtezioneViaggi.Conducente" type="checkbox"
+                id="fami2" value="per la famiglia">
+              <label class="form-check-label" for="fami2">conducente</label>
+            </div>
+            <div class="form-check form-check-inline col-auto ">
+              <input class="form-check-input" [(ngModel)]="objRisultato.ProtezioneViaggi.Circolazione" type="checkbox"
+                id="fami2" value="per la famiglia">
+              <label class="form-check-label" for="fami2">circolazione</label>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
