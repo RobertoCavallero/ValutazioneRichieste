@@ -8,7 +8,7 @@ export class ConnectionService {
 
   constructor(private httpClient: HttpClient) { }
 
-  private URL_SERVICE = "https://localhost:8888";
+  private URL_SERVICE = "https://server-valutazione-express.onrender.com";
 
   public sendGetRequest(endPoint: string) {
     console.log(this.URL_SERVICE);

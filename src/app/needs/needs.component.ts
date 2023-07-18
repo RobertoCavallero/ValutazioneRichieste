@@ -73,7 +73,7 @@ export class NeedsComponent {
       this.protBeni = false;
     }
 
-    if (this.objRisultato.ProtezionePersonale.SeStessi || this.objRisultato.ProtezionePersonale.Famiglia) {
+    if (this.objRisultato.ProtezionePersonale.SeStessi || this.objRisultato.ProtezionePersonale.Famigliax) {
       this.protProp = true;
     } else {
       this.protProp = false;
