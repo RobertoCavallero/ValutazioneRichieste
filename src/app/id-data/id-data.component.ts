@@ -42,6 +42,7 @@ export class IdDataComponent {
         this.datiOk.emit({ messaggio: "Partita Iva incorretta o non inserita", esito: false });
         return;
       }
+      this.objAzienda.PartitaIVA=this.pIva
 
       if (this.cap == '') {
         document.querySelector('#cap')?.classList.add('error');
@@ -52,7 +53,7 @@ export class IdDataComponent {
       if (!this.requestService.dataComune) {
         this.datiOk.emit({ messaggio: "CAP incorretto", esito: false });
       }
-      this.objPersona.CAP = this.cap;
+      this.objAzienda.CAP = this.cap;
 
     } else { // PERSONA NORMALE
       if (this.cognomeNome == '' || this.cognomeNome.split(' ')[1] == null) {

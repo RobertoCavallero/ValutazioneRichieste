@@ -1,1 +1,14 @@
-<p>preview works!</p>
+<div class="container justify-content-center text-center mt-2">
+    <h2>Anteprima della valutazione delle richieste</h2>
+    <div class="container p-5 rounded border shadow">
+        {{strAnteprima}}
+        <div class="row mt-2 justify-content-center text-center">
+            <div class="col-auto">
+                <button (click)="submit()"  type="button" class="btn btn-success mt-5">Salva i dati</button>
+            </div>
+            <div class="col-auto">
+                <button (click)="reset()"  type="button" class="btn btn-danger mt-5">Elimina e ricomincia</button>
+            </div>
+          </div>
+    </div>
+</div>

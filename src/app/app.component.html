@@ -1,4 +1,4 @@
-<div class="container mt-3">
+<div class="container mt-3" *ngIf="!tuttoOk">
   <h2 class="text-center">VALUTAZIONE DELLE RICHIESTE ED ESIGENZE DEL CONTRAENTE</h2>
   <div class="container p-5 rounded border shadow">
 
@@ -26,8 +26,7 @@
               <h6>Tipologia di persona giuridica</h6>
             </div>
             <div class="col-4">
-              <select class="form-select form-select-sm" id="tipologia"
-                [(ngModel)]="tipologia">
+              <select class="form-select form-select-sm" id="tipologia" [(ngModel)]="tipologia">
                 <option value="0" *ngIf="tipologia=='0'" selected>Seleziona una tipologia</option>
                 <option value="pmi">PMI</option>
                 <option value="lpa">Libero professionista o lavoratore autonomo</option>
@@ -54,13 +53,19 @@
     </div>
     <hr>
     <!-- Opzioni riguardanti i Dati Identificativi -->
-    <id-data (datiOk)="controlloFinito($event)" (controlloInserimento)="controlloInserimento($event)" [personaGiuridica]="this.personaGiuridica"></id-data>
+    <id-data (datiOk)="controlloFinito($event)" (controlloInserimento)="controlloInserimento($event)"
+      [personaGiuridica]="this.personaGiuridica"></id-data>
     <hr>
     <!-- Opzioni riguardanti le Informazioni -->
-    <info (datiOk)="controlloFinito($event)" (controlloInserimento)="controlloInserimento($event)" [personaGiuridica]="this.personaGiuridica"></info>
+    <info (datiOk)="controlloFinito($event)" (controlloInserimento)="controlloInserimento($event)"
+      [personaGiuridica]="this.personaGiuridica"></info>
     <hr>
     <!-- Opzioni riguardanti i Bisogni Assicurativi -->
-    <needs (datiOk)="controlloFinito($event)" (controlloInserimento)="controlloInserimento($event)" [personaGiuridica]="this.personaGiuridica"></needs>
+    <needs (datiOk)="controlloFinito($event)" (controlloInserimento)="controlloInserimento($event)"
+      [personaGiuridica]="this.personaGiuridica"></needs>
     <div class="row">
       <button (click)="controlloDati()" type="button" class="btn btn-success mt-5">Visualizza l'anteprima</button>
     </div>
+  </div>
+</div>
+<preview *ngIf="tuttoOk" [personaGiuridica]="personaGiuridica" [objCliente]="objFinale"></preview>

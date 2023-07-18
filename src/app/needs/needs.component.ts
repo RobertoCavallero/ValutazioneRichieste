@@ -10,6 +10,7 @@ export class NeedsComponent {
   @Output() controlloInserimento = new EventEmitter();
   @Output() datiOk = new EventEmitter();
   objRisultato: any = {
+    PolizzePreesistenti: [],
     AmbitoCopertura: 'Ignoto',
     ProtezioneDanniCausati: {
       VitaPersonale: false,

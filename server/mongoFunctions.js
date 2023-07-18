@@ -75,58 +75,11 @@ mongoFunctions.prototype.updateOne = function (nomeDb, collection, filter, updat
   });
 }
 
-mongoFunctions.prototype.findLogin = function (req, nomeDb, collection, query, callback){
-  setConnection(nomeDb, collection, function (errConn,collection,conn){
-    if(errConn.codeErr==-1){
-      collection.findOne(query, function(errQ,data) {
-        conn.close();
-        let errQuery;
-        if(!errQ){
-          let errData;
-          if(data==null)
-            errData = {codeErr:401, message: "Errore login. Username inesistente!"};
-          else{
-            if (req.body.password == data.pwd){
-              errData = {codeErr:-1, message:""};
-            }
-            else
-              errData =  {codeErr:401, message: "Errore login. Password errata"};
-          }
-          callback(errData,data);
-        }else {
-          errQuery = {codeErr: 500, message: "Errore durante l'esecuzione della query"};
-          callback(errQuery,{});
-        }
-      });
-    }
-    else
-      callback(errConn, {});
-  });
-}
 
 mongoFunctions.prototype.find = function (nomeDb, collection, query, callback){
   setConnection(nomeDb, collection, function (errConn,collection,conn){
     if(errConn.codeErr==-1){
       collection.find(query).toArray(function(errQ,data) {
-        conn.close();
-        let errQuery = {codeErr: -1, message: ""};
-        if(!errQ)
-          callback(errQuery,data);
-        else {
-          errQuery = {codeErr: 500, message: "Errore durante l'esecuzione della query"};
-          callback(errQuery,{});
-        }
-      });
-    }
-    else
-      callback(errConn, {});
-  });
-}
-
-mongoFunctions.prototype.findConference = function (nomeDb, collection, query, callback){
-  setConnection(nomeDb, collection, function (errConn,collection,conn){
-    if(errConn.codeErr==-1){
-      collection.distinct("conference",function(errQ,data) {
         conn.close();
         let errQuery = {codeErr: -1, message: ""};
         if(!errQ)

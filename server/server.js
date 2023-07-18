@@ -46,29 +46,8 @@ app.use('/api/getComune', function(req,res,next){
   })
 })
 
-app.use('/api/getConference', function(req, res, next) {
-  mongoFunctions.findConference("basket", "player", {}, function (err, data) {
-    if (err.codeErr == -1)
-      res.send({data:data});
-    else
-      error(req, res, {"code": err.codeErr, "message": err.message});
-  });
-});
-
-app.use('/api/getPlayers', function(req, res, next) {
-  console.log(req.body);
-  let query={conference:req.body.conf};
-  mongoFunctions.find("basket", "player", query, function (err, data) {
-    if (err.codeErr == -1)
-      res.send({data:data});
-    else
-      error(req, res, {"code": err.codeErr, "message": err.message});
-  });
-}); 
-
-app.post('/api/insertPlayer', function(req, res, next) {
-  let query={_id:req.body.id, nome:req.body.nome, punti:req.body.punti, squadra:req.body.squadra, eta:req.body.eta, conference:req.body.conf, ruolo: req.body.ruolo};
-  mongoFunctions.insertOne("basket", "player", query, function (err, data) {
+app.post('/api/postCliente', function(req, res, next) {
+  mongoFunctions.insertOne("ValutazioneRichieste", "Contraenti", req.body, function (err, data) {
     if (err.codeErr == -1) {
       console.log(data);
       res.send({data:data});

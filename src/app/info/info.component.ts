@@ -80,7 +80,7 @@ export class InfoComponent {
         SettoreMerceologico: this.settMerc,
         ImmobiliDiProprieta:this.possImmobili
       }
-    } else {
+    } else { //CONTROLLO PERSONA NORMALE
       this.objPersona={
         NucleoFamigliare: this.nucleoFamigliare,
         ImmobiliDiProprieta:this.possImmobili,

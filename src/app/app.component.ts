@@ -22,7 +22,9 @@ export class AppComponent {
   txtNome: string = '';
   objPersona: any = {};
   objAzienda: any = {};
+  objFinale: any = {};
   numDipendenti: number = 0;
+  tuttoOk: boolean = false;
 
   controlloInserimento(e: any) {
     if (e.target.value == '' || e.target.value == null || !e.target.validity.valid) {
@@ -74,12 +76,16 @@ export class AppComponent {
         this.objAzienda = { ...this.objAzienda, ...this.idData.objAzienda, ...this.info.objAzienda, BisogniAssicurativi: this.needs.objRisultato };
         this.objAzienda.PersonaGiuridica = this.personaGiuridica;
         this.objAzienda.TipologiaPersonaGiuridica = this.tipologia;
+        this.objAzienda.NumeroDipendenti = this.numDipendenti;
         console.log(this.objAzienda);
+        this.objFinale = this.objAzienda;
       } else {
         this.objPersona = { ...this.objPersona, ...this.idData.objPersona, ...this.info.objPersona, BisogniAssicurativi: this.needs.objRisultato };
         this.objPersona.PersonaGiuridica = this.personaGiuridica;
         console.log(this.objPersona);
+        this.objFinale = this.objPersona;
       }
+      this.tuttoOk=true
     }
   }
 
